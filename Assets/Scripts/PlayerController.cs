@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform searchTran;
 
+    [SerializeField]
+    private UIManager uiManager;
+
     void Start()
     {
         TryGetComponent(out rb);
@@ -67,7 +70,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(hit.collider.gameObject.name);
 
                 if (hit.collider.TryGetComponent(out GimmickBase gimmic)) {
-                    gimmic.TriggerGimmick();
+                    gimmic.TriggerGimmick(uiManager);
                 }
             }
         }
