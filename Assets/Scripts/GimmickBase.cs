@@ -5,11 +5,22 @@ using UnityEngine;
 public class GimmickBase : MonoBehaviour
 {
     [SerializeField]
-    private bool isDestroyOn;
+    protected bool isDestroyOn;
 
+    [SerializeField]
+    protected ItemData itemData;
 
-    public void TriggerGimmick() {
+    /// <summary>
+    /// ギミック発動時のメソッド
+    /// </summary>
+    /// <param name="uiManager"></param>
+    public virtual void TriggerGimmick(UIManager uiManager) {
+
         Debug.Log("Gimmick Triggered");
+
+        uiManager.DisplayGetInfo(itemData);
+
+        GamaData.instance.AddItemDataList(itemData);
 
         if (isDestroyOn) {
             Destroy(gameObject);
