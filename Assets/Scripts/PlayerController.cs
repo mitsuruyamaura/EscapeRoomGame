@@ -70,6 +70,13 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(hit.collider.gameObject.name);
 
                 if (hit.collider.TryGetComponent(out GimmickBase gimmic)) {
+
+                    // すでに発動済のギミック発動かどうかを確認
+                    if (gimmic.CheckTriggerdGimmick()) {
+                        return;
+                    }
+
+                    // ギミック発動
                     gimmic.TriggerGimmick(uiManager);
                 }
             }
