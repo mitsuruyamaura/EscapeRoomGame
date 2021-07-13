@@ -8,6 +8,9 @@ public class GamaData : MonoBehaviour
 
     public List<ItemData> itemDatasList = new List<ItemData>();
 
+    public int controllRoomNo;
+
+
     private void Awake() {
         if (instance == null) {
             instance = this;
