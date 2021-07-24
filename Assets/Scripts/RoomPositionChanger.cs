@@ -4,7 +4,10 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-public class RoomController : MonoBehaviour
+/// <summary>
+/// 部屋の位置を変更するクラス。部屋の各オブジェクトから static を解除すること
+/// </summary>
+public class RoomPositionChanger : MonoBehaviour
 {
     [SerializeField]
     private RoomDetail[] originalArray;
@@ -43,7 +46,7 @@ public class RoomController : MonoBehaviour
     /// </summary>
     private void ChangeRoomBackToForward() {
 
-        //a = GamaData.instance.currentRoomNo;
+        //a = GamaData.instance.currentInRoomNo;
 
         a++;
 

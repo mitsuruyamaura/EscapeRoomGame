@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 部屋にアタッチするクラス
+/// </summary>
 public class RoomDetail : MonoBehaviour
 {
     public int roomNo;
