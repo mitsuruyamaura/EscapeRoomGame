@@ -6,7 +6,11 @@ public class RoomCondition_ChangeGravity : RoomConditionBase
 {
     private Vector3 gravityScale;
 
+    private Vector3 originGravityScale;
+
     protected override IEnumerator StartRoomCondition() {
+
+        originGravityScale = Physics.gravity;
 
         // プレイヤーにかける重力を設定
         gravityScale = new Vector3(0, conditionValue, 0);
@@ -15,7 +19,12 @@ public class RoomCondition_ChangeGravity : RoomConditionBase
         //SetWorldGravity();
 
         // 設定完了にする
-        return base.StartRoomCondition();
+        yield return base.StartRoomCondition();
+
+        //yield return new WaitForSeconds(3.0f);
+
+        // ゲーム全体の重力を元に戻す
+        //ReturnWorldGravity();
     }
 
     private void FixedUpdate() {
@@ -39,5 +48,12 @@ public class RoomCondition_ChangeGravity : RoomConditionBase
     /// </summary>
     private void SetWorldGravity() {
         Physics.gravity = gravityScale;
+    }
+
+    /// <summary>
+    /// ゲーム全体の重力を元に戻す
+    /// </summary>
+    private void ReturnWorldGravity() {
+        Physics.gravity = originGravityScale;
     }
 }
