@@ -3,6 +3,6 @@
 /// </summary>
 public enum RoomConditionType
 {
-    IncreaseGravity,
+    ChangeGravity,
 
 }

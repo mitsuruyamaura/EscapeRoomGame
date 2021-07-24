@@ -50,6 +50,9 @@ public class RoomDetail : MonoBehaviour
             // •”‰®‚©‚ç‘ÞŽº
             inRoom = false;
             SwitchPlayerParent(false);
+
+            playerController.RemoveCondition();
+
             playerController = null;
         }
     }
