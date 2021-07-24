@@ -37,6 +37,7 @@ namespace UnityChan
 			StartCoroutine ("RandomChange");
 		}
 	
+		[System.Obsolete]
 		// Update is called once per frame
 		void  Update ()
 		{

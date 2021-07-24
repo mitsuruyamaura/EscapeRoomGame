@@ -30,7 +30,7 @@ public class GimmickBase : MonoBehaviour
 
         uiManager.DisplayGetInfo(itemData);
 
-        GamaData.instance.AddItemDataList(itemData);
+        GamaData.instance.AddItemDatasList(itemData);
 
         if (isDestroyOn) {
             Destroy(gameObject);
