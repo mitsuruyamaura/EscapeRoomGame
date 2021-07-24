@@ -15,6 +15,9 @@ public class RoomDetail : MonoBehaviour
 
     public PlayerController playerController;
 
+    public RoomConditionType roomConditionType;
+
+
     /// <summary>
     /// 部屋とプレイヤーの親子関係の設定・解除
     /// </summary>
@@ -36,6 +39,9 @@ public class RoomDetail : MonoBehaviour
             inRoom = true;
             SwitchPlayerParent(true);
             GamaData.instance.SetRoomInfo(roomNo);
+
+            // プレイヤーに部屋のコンディションを付与
+            playerController.AddRoomCondition(roomConditionType);
         }
     }
 
@@ -44,6 +50,9 @@ public class RoomDetail : MonoBehaviour
             // 部屋から退室
             inRoom = false;
             SwitchPlayerParent(false);
+
+            playerController.RemoveCondition();
+
             playerController = null;
         }
     }

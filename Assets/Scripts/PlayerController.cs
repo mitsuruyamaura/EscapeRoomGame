@@ -82,4 +82,29 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// 部屋のコンディションの情報をプレイヤーに付与
+    /// </summary>
+    /// <param name="addRoomConditionType"></param>
+    public void AddRoomCondition(RoomConditionType addRoomConditionType) {
+        var roomCondition = addRoomConditionType switch {
+            RoomConditionType.ChangeGravity => gameObject.AddComponent<RoomCondition_ChangeGravity>(),
+            _ => null,
+        };
+
+        // コンディションの開始
+        roomCondition.OnEnterRoomCondition(this);
+    }
+
+    /// <summary>
+    /// 付与されている部屋のコンディションの情報を削除
+    /// </summary>
+    public void RemoveCondition() {
+        Destroy(GetComponent<RoomConditionBase>());
+    }
+
+    public Rigidbody GetRigidbody() {
+        return rb;
+    }
 }

@@ -10,6 +10,8 @@ public class DataBaseManager : MonoBehaviour
 
     public GimmickDataSO gimmickDataSO;
 
+    public RoomConditionDataSO roomConditionDataSO;
+
 
     void Awake() {
         if (instance == null) {
@@ -18,5 +20,14 @@ public class DataBaseManager : MonoBehaviour
         } else {
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// 部屋のコンディションのデータを取得
+    /// </summary>
+    /// <param name="getRoomConditionType"></param>
+    /// <returns></returns>
+    public RoomConditionDataSO.RoomConditionData GetRoomConditionData(RoomConditionType getRoomConditionType) {
+        return roomConditionDataSO.roomConditionDatasList.Find(x => x.roomConditionType == getRoomConditionType);
     }
 }
