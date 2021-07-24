@@ -65,7 +65,8 @@ namespace UnityChan
 			orgVectColCenter = col.center;
 		}
 	
-	
+
+		[System.Obsolete]	
 		// 以下、メイン処理.リジッドボディと絡めるので、FixedUpdate内で処理を行う.
 		void FixedUpdate ()
 		{
