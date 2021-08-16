@@ -45825,6 +45825,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needClearItemTypes: 0200000003000000
+  isRandomClearItemSet: 1
+  allItems: 
+  shuffleItems: 
+  minItemCount: 2
 --- !u!65 &1300588658
 BoxCollider:
   m_ObjectHideFlags: 0
