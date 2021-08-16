@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private UIManager uiManager;
 
+    public ItemManager itemManager;
+
     void Start()
     {
         TryGetComponent(out rb);
@@ -106,5 +108,13 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody GetRigidbody() {
         return rb;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.TryGetComponent(out ItemDetail itemDetail)) {
+            itemManager.UpdateHaveItem(itemDetail.GetItemType());
+
+            Destroy(itemDetail.gameObject);
+        }
     }
 }
