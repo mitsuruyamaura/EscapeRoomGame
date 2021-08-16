@@ -32,7 +32,7 @@ public class RoomPositionChanger : MonoBehaviour
         // ˆÊ’uî•ñ‚ğ•Û
         for (int i = 0; i < originalArray.Length; i++) {
             newPos[i] = originalArray[i].transform.localPosition;
-            Debug.Log(newPos[i]);
+            //Debug.Log(newPos[i]);
         }
     }
 
