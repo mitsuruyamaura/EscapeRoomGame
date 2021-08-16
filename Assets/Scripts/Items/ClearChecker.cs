@@ -1,14 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public class ClearChecker : MonoBehaviour
 {
     [SerializeField, Header("クリアに必要なアイテムの名前")]
     private ItemType[] needClearItemTypes;
 
+    [SerializeField, Header("クリアアイテムのランダム設定有無")]
+    private bool isRandomClearItemSet;
+
+    [SerializeField, Header("デバッグ用")]
+    private ItemType[] allItems;
+
+    [SerializeField, Header("デバッグ用")]
+    private ItemType[] shuffleItems;
+
+    [SerializeField, Header("最小クリアアイテム数")]
+    private int minItemCount;
+
+    private bool isGameUp;
+
+
+    void Start() {
+        // ランダム設定する場合
+        if (isRandomClearItemSet) {
+            RandomSetClearItems();
+        }
+    }
+
+    /// <summary>
+    /// クリアに必要なアイテムをランダムで設定
+    /// </summary>
+    public void RandomSetClearItems() {
+        // クリアに必要なアイテムの数のランダム設定
+        needClearItemTypes = new ItemType[UnityEngine.Random.Range(minItemCount, (int)ItemType.Count)];
+
+        // すべてのアイテムの情報を持つ配列を作る
+        ItemType[] allItems = new ItemType[(int)ItemType.Count];
+
+        // 要素設定
+        for (int i = 0; i < allItems.Length; i++) {
+            allItems[i] = (ItemType)i;
+        }
+
+        // すべてのアイテムの要素をシャッフル
+        ItemType[] shuffleItems = allItems.OrderBy(x => Guid.NewGuid()).ToArray();
+
+        // シャッフルした要素をクリアのアイテムに設定
+        for (int i = 0; i < needClearItemTypes.Length; i++) {
+            needClearItemTypes[i] = shuffleItems[i];
+        }
+    }
 
     private void OnTriggerEnter(Collider other) {
+        if (isGameUp) {
+            return;
+        }
+
         if (other.gameObject.TryGetComponent(out PlayerController player)) {
 
             // ゲームクリア判定の方法の分岐
@@ -33,7 +84,7 @@ public class ClearChecker : MonoBehaviour
                 return;
             }
         }
-
+        isGameUp = true;
         Debug.Log("ゲームクリア");
     }
 
@@ -52,7 +103,7 @@ public class ClearChecker : MonoBehaviour
                 }
             }
         }
-
+        isGameUp = true;
         Debug.Log("ゲームクリア");
     }
 }
