@@ -24,7 +24,7 @@ public class ClearChecker : MonoBehaviour
     private bool isGameUp;
 
 
-    void Start() {
+    public void SetUpClearChecker() {
         // ランダム設定する場合
         if (isRandomClearItemSet) {
             RandomSetClearItems();
@@ -105,5 +105,13 @@ public class ClearChecker : MonoBehaviour
         }
         isGameUp = true;
         Debug.Log("ゲームクリア");
+    }
+
+    public int GetNeedClearItemCount() {
+        return needClearItemTypes.Length;
+    }
+
+    public int GetClearItemTypeNo(int no) {
+        return (int)needClearItemTypes[no];
     }
 }

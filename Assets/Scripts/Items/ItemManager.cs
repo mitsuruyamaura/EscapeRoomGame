@@ -7,8 +7,26 @@ public class ItemManager : MonoBehaviour
     [Header("所持しているアイテム")]
     public bool[] haveItems;
 
+    [SerializeField]
+    private ClearChecker clearChecker;
+
+    [SerializeField]
+    private ItemIconDetail itemIconDetailPrefab;
+
+    [SerializeField]
+    private List<ItemIconDetail> itemIconDetailsList = new List<ItemIconDetail>();
+
+    [SerializeField]
+    private Transform itemIconDetailTran;
+
+
     void Start() {
-        SetUpItemManager();    
+        SetUpItemManager();
+
+        // クリア条件の設定
+        clearChecker.SetUpClearChecker();
+
+        CreateItemIconDetails();
     }
 
     /// <summary>
@@ -20,6 +38,18 @@ public class ItemManager : MonoBehaviour
             haveItems = new bool[(int)ItemType.Count];
         } else {
             haveItems = new bool[itemCount];
+        }
+    }
+
+    /// <summary>
+    /// アイテムアイコンの作成
+    /// </summary>
+    private void CreateItemIconDetails() {
+
+        for (int i = 0; i < clearChecker.GetNeedClearItemCount(); i++) {
+            ItemIconDetail itemIconDetail = Instantiate(itemIconDetailPrefab, itemIconDetailTran, false);
+            itemIconDetail.SetUpItemIconDetail(clearChecker.GetClearItemTypeNo(i));
+            itemIconDetailsList.Add(itemIconDetail);
         }
     }
 
