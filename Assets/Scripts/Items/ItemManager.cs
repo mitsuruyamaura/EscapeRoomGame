@@ -7,8 +7,26 @@ public class ItemManager : MonoBehaviour
     [Header("所持しているアイテム")]
     public bool[] haveItems;
 
+    [SerializeField]
+    private ClearChecker clearChecker;
+
+    [SerializeField]
+    private ItemIconDetail itemIconDetailPrefab;
+
+    [SerializeField]
+    private List<ItemIconDetail> itemIconDetailsList = new List<ItemIconDetail>();
+
+    [SerializeField]
+    private Transform itemIconDetailTran;
+
+
     void Start() {
-        SetUpItemManager();    
+        SetUpItemManager();
+
+        // クリア条件の設定
+        clearChecker.SetUpClearChecker();
+
+        CreateItemIconDetails();
     }
 
     /// <summary>
@@ -24,6 +42,18 @@ public class ItemManager : MonoBehaviour
     }
 
     /// <summary>
+    /// UI にアイテムアイコンの作成
+    /// </summary>
+    private void CreateItemIconDetails() {
+
+        for (int i = 0; i < clearChecker.GetNeedClearItemCount(); i++) {
+            ItemIconDetail itemIconDetail = Instantiate(itemIconDetailPrefab, itemIconDetailTran, false);
+            itemIconDetail.SetUpItemIconDetail(clearChecker.GetClearItemTypeNo(i));
+            itemIconDetailsList.Add(itemIconDetail);
+        }
+    }
+
+    /// <summary>
     /// 所持しているアイテム情報の更新
     /// </summary>
     /// <param name="itemType"></param>
@@ -33,6 +63,13 @@ public class ItemManager : MonoBehaviour
 
         if (isSwitch) {
             Debug.Log("アイテム取得 : " + itemType.ToString());
+
+            // 獲得したアイテムのアイコンを表示
+            //itemIconDetailsList.Find(x => x.ItemNo == (int)itemType).SwitchDisplayItemIcon(true);
+
+            // 獲得したアイテムのアイコンの透明度を戻す
+            itemIconDetailsList.Find(x => x.ItemNo == (int)itemType).TransparentDisplayItemIcon(1.0f);
+
         } else {
             Debug.Log("アイテム喪失 : " + itemType.ToString());
         }
