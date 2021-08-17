@@ -42,7 +42,7 @@ public class ItemManager : MonoBehaviour
     }
 
     /// <summary>
-    /// アイテムアイコンの作成
+    /// UI にアイテムアイコンの作成
     /// </summary>
     private void CreateItemIconDetails() {
 
@@ -65,7 +65,10 @@ public class ItemManager : MonoBehaviour
             Debug.Log("アイテム取得 : " + itemType.ToString());
 
             // 獲得したアイテムのアイコンを表示
-            itemIconDetailsList.Find(x => x.ItemNo == (int)itemType).SwitchDisplayItemIcon(true);
+            //itemIconDetailsList.Find(x => x.ItemNo == (int)itemType).SwitchDisplayItemIcon(true);
+
+            // 獲得したアイテムのアイコンの透明度を戻す
+            itemIconDetailsList.Find(x => x.ItemNo == (int)itemType).TransparentDisplayItemIcon(1.0f);
 
         } else {
             Debug.Log("アイテム喪失 : " + itemType.ToString());

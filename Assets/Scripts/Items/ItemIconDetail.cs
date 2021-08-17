@@ -28,7 +28,10 @@ public class ItemIconDetail : MonoBehaviour
         imgItemIcon.sprite = Resources.Load<Sprite>("ItemIcon_" + itemNo);
 
         // アイコンを非表示
-        SwitchDisplayItemIcon(false);        
+        //SwitchDisplayItemIcon(false);
+
+        // アイコンを半透明にする
+        TransparentDisplayItemIcon(0.3f);
     }
 
     /// <summary>
@@ -37,5 +40,13 @@ public class ItemIconDetail : MonoBehaviour
     /// <param name="isSwitch"></param>
     public void SwitchDisplayItemIcon(bool isSwitch) {
         imgItemIcon.enabled = isSwitch;
+    }
+
+    /// <summary>
+    /// アイテムアイコンの透明度の切り替え
+    /// </summary>
+    /// <param name="alpha"></param>
+    public void TransparentDisplayItemIcon(float alpha) {
+        imgItemIcon.color = new Color(1.0f, 1.0f, 1.0f, alpha);
     }
 }
