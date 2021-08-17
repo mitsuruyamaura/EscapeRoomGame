@@ -63,6 +63,10 @@ public class ItemManager : MonoBehaviour
 
         if (isSwitch) {
             Debug.Log("アイテム取得 : " + itemType.ToString());
+
+            // 獲得したアイテムのアイコンを表示
+            itemIconDetailsList.Find(x => x.ItemNo == (int)itemType).SwitchDisplayItemIcon(true);
+
         } else {
             Debug.Log("アイテム喪失 : " + itemType.ToString());
         }

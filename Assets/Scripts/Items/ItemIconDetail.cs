@@ -8,11 +8,23 @@ public class ItemIconDetail : MonoBehaviour
     [SerializeField]
     private Image imgItemIcon;
 
+    private int itemNo;
+
+    /// <summary>
+    /// itemNo のプロパティ
+    /// </summary>
+    public int ItemNo {
+        set => itemNo = value; 
+        get => itemNo; 
+    }
+
     /// <summary>
     /// 設定
     /// </summary>
     /// <param name="itemNo"></param>
     public void SetUpItemIconDetail(int itemNo) {
+        ItemNo = itemNo;
+        
         imgItemIcon.sprite = Resources.Load<Sprite>("ItemIcon_" + itemNo);
 
         // アイコンを非表示
