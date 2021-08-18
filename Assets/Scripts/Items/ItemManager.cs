@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ItemManager : MonoBehaviour
 {
@@ -22,7 +23,14 @@ public class ItemManager : MonoBehaviour
     [SerializeField, Header("配置アイテムのリスト")]
     private List<ItemDetail> itemsList = new List<ItemDetail>();
 
-    // TODO アイテムのプレファブのアサイン
+    [SerializeField]
+    private ItemDetail itemDetailPrefab;
+
+    [SerializeField]
+    private Transform leftBottomTran;
+
+    [SerializeField]
+    private Transform rightTopTran;
 
 
     void Start() {
@@ -34,6 +42,7 @@ public class ItemManager : MonoBehaviour
         CreateItemIconDetails();
 
         // TODO アイテムの配置
+        CreateItems();
 
         // アイテムの情報設定
         SetItemDetails();
@@ -85,7 +94,33 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    // TODO クリアアイテムの生成
+    /// <summary>
+    /// アイテムの生成
+    /// </summary>
+    private void CreateItems() {
+        for (int i = 0; i < clearChecker.GetNeedClearItemCount(); i++) {
+
+            // 指定した範囲内でランダムな位置の設定
+            Vector3 randomPos = new Vector3(
+                Random.Range(leftBottomTran.position.x, rightTopTran.position.x), 
+                leftBottomTran.position.y,
+                Random.Range(leftBottomTran.position.z, rightTopTran.position.z)
+                );
+
+            // ランダムな位置にアイテム生成
+            ItemDetail item = Instantiate(itemDetailPrefab, randomPos, itemDetailPrefab.transform.rotation);
+
+            // ランダムに配置したアイテムが壁などに埋もれてしまわないように、アイテムから見て NavMesh 上の最も近い位置を見つける。見つけた情報が hit に代入される
+            if (NavMesh.SamplePosition(item.transform.position, out NavMeshHit hit, 3.0f, NavMesh.AllAreas)) {
+
+                // アイテムを NavMesh 上に配置して必ずプレイヤーが取れる位置にする
+                item.transform.position = hit.position;
+            }
+
+            // リストに追加
+            itemsList.Add(item);
+        }
+    }
 
     /// <summary>
     /// 各アイテムのアイテムの種類の情報の設定
