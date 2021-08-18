@@ -19,6 +19,11 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private Transform itemIconDetailTran;
 
+    [SerializeField, Header("配置アイテムのリスト")]
+    private List<ItemDetail> itemsList = new List<ItemDetail>();
+
+    // TODO アイテムのプレファブのアサイン
+
 
     void Start() {
         SetUpItemManager();
@@ -27,6 +32,11 @@ public class ItemManager : MonoBehaviour
         clearChecker.SetUpClearChecker();
 
         CreateItemIconDetails();
+
+        // TODO アイテムの配置
+
+        // アイテムの情報設定
+        SetItemDetails();
     }
 
     /// <summary>
@@ -72,6 +82,17 @@ public class ItemManager : MonoBehaviour
 
         } else {
             Debug.Log("アイテム喪失 : " + itemType.ToString());
+        }
+    }
+
+    // TODO クリアアイテムの生成
+
+    /// <summary>
+    /// 各アイテムのアイテムの種類の情報の設定
+    /// </summary>
+    private void SetItemDetails() {
+        for (int i = 0; i < clearChecker.GetNeedClearItemCount(); i++) {
+            itemsList[i].SetItemType(clearChecker.GetClearItemType(i));
         }
     }
 }

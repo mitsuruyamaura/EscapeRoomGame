@@ -30386,6 +30386,9 @@ MonoBehaviour:
   itemIconDetailPrefab: {fileID: 4592089409060313824, guid: 888caec6a2d2b1d4ca055935ee282aef, type: 3}
   itemIconDetailsList: []
   itemIconDetailTran: {fileID: 319776050}
+  itemsList:
+  - {fileID: 1891661044}
+  - {fileID: 1497563478}
 --- !u!4 &997960761
 Transform:
   m_ObjectHideFlags: 0
