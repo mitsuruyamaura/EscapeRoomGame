@@ -114,4 +114,8 @@ public class ClearChecker : MonoBehaviour
     public int GetClearItemTypeNo(int no) {
         return (int)needClearItemTypes[no];
     }
+
+    public ItemType GetClearItemType(int no) {
+        return needClearItemTypes[no];
+    }
 }
