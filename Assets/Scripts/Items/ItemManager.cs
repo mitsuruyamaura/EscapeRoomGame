@@ -32,6 +32,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private Transform rightTopTran;
 
+    private float maxDistance = 3.0f;    // 原点(アイテムの位置)からの NavMesh の最大サンプリング値
+
 
     void Start() {
         SetUpItemManager();
@@ -111,7 +113,7 @@ public class ItemManager : MonoBehaviour
             ItemDetail item = Instantiate(itemDetailPrefab, randomPos, itemDetailPrefab.transform.rotation);
 
             // ランダムに配置したアイテムが壁などに埋もれてしまわないように、アイテムから見て NavMesh 上の最も近い位置を見つける。見つけた情報が hit に代入される
-            if (NavMesh.SamplePosition(item.transform.position, out NavMeshHit hit, 3.0f, NavMesh.AllAreas)) {
+            if (NavMesh.SamplePosition(item.transform.position, out NavMeshHit hit, maxDistance, NavMesh.AllAreas)) {
 
                 // アイテムを NavMesh 上に配置して必ずプレイヤーが取れる位置にする
                 item.transform.position = hit.position;
@@ -129,5 +131,23 @@ public class ItemManager : MonoBehaviour
         for (int i = 0; i < clearChecker.GetNeedClearItemCount(); i++) {
             itemsList[i].SetItemType(clearChecker.GetClearItemType(i));
         }
+    }
+
+    public void DestroyAllItems() {
+        for (int i = 0; i < itemsList.Count; i++) {
+            if (itemsList[i]) {
+                Destroy(itemsList[i].gameObject);
+            }
+        }
+        itemsList.Clear();
+    }
+
+    void Update() {
+
+        // デバッグ用。アイテム再配置
+        if (Input.GetKeyDown(KeyCode.B)) {
+            DestroyAllItems();
+            CreateItems();
+        }    
     }
 }
