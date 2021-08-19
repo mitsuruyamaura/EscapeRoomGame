@@ -35,6 +35,10 @@ public class ItemManager : MonoBehaviour
     private float maxDistance = 3.0f;    // 原点(アイテムの位置)からの NavMesh の最大サンプリング値
 
 
+    [SerializeField]
+    private UIManager uiManagaer;
+
+
     void Start() {
         SetUpItemManager();
 
@@ -48,6 +52,8 @@ public class ItemManager : MonoBehaviour
 
         // アイテムの情報設定
         SetItemDetails();
+
+        StartCoroutine(uiManagaer.PlayOpening(itemIconDetailsList));
     }
 
     /// <summary>
