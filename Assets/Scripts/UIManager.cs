@@ -19,6 +19,13 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image imgItem;
 
+    // OpeningSet
+    [SerializeField]
+    private CanvasGroup canvasGroupOpening;
+
+    [SerializeField]
+    private Transform needItemTran;
+
 
     void Start() {
         btnBackgroundFilter.onClick.AddListener(CloseGetInfo);
@@ -52,9 +59,25 @@ public class UIManager : MonoBehaviour
 
         canvasGroupInfo.blocksRaycasts = true;
         btnBackgroundFilter.interactable = true;
-
-
     }
 
+    /// <summary>
+    /// オープニング演出の再生
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator PlayOpening(List<ItemIconDetail> itemIconDetailsList) {
 
+        canvasGroupOpening.alpha = 0;
+
+        for (int i = 0; i < itemIconDetailsList.Count; i++) {
+            Instantiate(itemIconDetailsList[i], needItemTran).TransparentDisplayItemIcon(1.0f);
+        }
+
+        canvasGroupOpening.DOFade(1.0f, 1.0f).SetEase(Ease.Linear);
+
+        yield return new WaitForSeconds(2.5f);
+
+        canvasGroupOpening.DOFade(0f, 1.0f).SetEase(Ease.Linear)
+            .OnComplete(() => { canvasGroupOpening.blocksRaycasts = false; });    
+    }
 }
