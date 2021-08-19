@@ -73036,7 +73036,7 @@ MonoBehaviour:
   canvasGroupInfo: {fileID: 1740959346}
   imgItem: {fileID: 1816955802}
   canvasGroupOpening: {fileID: 1478859552}
-  needIemTran: {fileID: 1904893243}
+  needItemTran: {fileID: 1904893243}
 --- !u!4 &2138106128
 Transform:
   m_ObjectHideFlags: 0
