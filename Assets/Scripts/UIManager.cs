@@ -138,6 +138,9 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void OnClickRestart() {
 
+        // TODO トランジション処理
+
+
         // 文字点滅のループ処理を解除
         tween.Kill();
 
