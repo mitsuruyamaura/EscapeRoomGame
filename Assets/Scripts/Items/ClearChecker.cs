@@ -21,6 +21,9 @@ public class ClearChecker : MonoBehaviour
     [SerializeField, Header("最小クリアアイテム数")]
     private int minItemCount;
 
+    [SerializeField]
+    private UIManager uiManager;
+
     private bool isGameUp;
 
 
@@ -86,6 +89,9 @@ public class ClearChecker : MonoBehaviour
         }
         isGameUp = true;
         Debug.Log("ゲームクリア");
+
+        // ゲームクリア表示
+        uiManager.PlayGameClear();
     }
 
     /// <summary>
@@ -105,6 +111,9 @@ public class ClearChecker : MonoBehaviour
         }
         isGameUp = true;
         Debug.Log("ゲームクリア");
+
+        // ゲームクリア表示
+        uiManager.PlayGameClear();
     }
 
     public int GetNeedClearItemCount() {
