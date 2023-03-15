@@ -8,8 +8,13 @@ public class ItemManager : MonoBehaviour
     [Header("所持しているアイテム")]
     public bool[] haveItems;
 
+    public ItemDetail[] itemPrefabs;
+
     [SerializeField]
-    private ClearChecker clearChecker;
+    private Transform leftBottomTran;
+
+    [SerializeField]
+    private Transform rightTopTran;
 
     [SerializeField]
     private ItemIconDetail itemIconDetailPrefab;
@@ -27,10 +32,7 @@ public class ItemManager : MonoBehaviour
     private ItemDetail itemDetailPrefab;
 
     [SerializeField]
-    private Transform leftBottomTran;
-
-    [SerializeField]
-    private Transform rightTopTran;
+    private ClearChecker clearChecker;
 
     private float maxDistance = 3.0f;    // 原点(アイテムの位置)からの NavMesh の最大サンプリング値
 

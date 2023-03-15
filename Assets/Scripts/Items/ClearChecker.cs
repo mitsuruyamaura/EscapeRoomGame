@@ -59,6 +59,7 @@ public class ClearChecker : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
+
         if (isGameUp) {
             return;
         }
@@ -70,7 +71,7 @@ public class ClearChecker : MonoBehaviour
                 JudgeGameClearItemTypes(player.itemManager);
             } else {
                 JudgeGameClearAllItems(player.itemManager);
-            }            
+            }
         }
     }
 
@@ -79,14 +80,21 @@ public class ClearChecker : MonoBehaviour
     /// </summary>
     public void JudgeGameClearAllItems(ItemManager itemManager) {
 
-        for (int i = 0; i < itemManager.haveItems.Length; i++) {
-            if (itemManager.haveItems[i]) {
-                continue;
-            } else {
-                Debug.Log("アイテムが足りない");
-                return;
-            }
+        //for (int i = 0; i < itemManager.haveItems.Length; i++) {
+        //    if (itemManager.haveItems[i]) {
+        //        continue;
+        //    } else {
+        //        Debug.Log("アイテムが足りない");
+        //        return;
+        //    }
+        //}
+
+        // これでも OK
+        if (itemManager.haveItems.All(x => x != true)) {
+            Debug.Log("アイテムが足りない");
+            return;
         }
+
         isGameUp = true;
         Debug.Log("ゲームクリア");
 
